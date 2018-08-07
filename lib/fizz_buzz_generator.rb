@@ -1,6 +1,6 @@
 class FizzBuzzGenerator
   CHECKS = [{ word: 'Fizz', divisor: 3 },
-           { word: 'Buzz', divisor: 5 }].freeze
+            { word: 'Buzz', divisor: 5 }].freeze
 
   def output_for(number)
     raise ArgumentError unless valid?(number)
@@ -12,6 +12,12 @@ class FizzBuzzGenerator
     output.empty? ? number : output
   end
 
+  def upto(limit)
+    raise ArgumentError unless valid?(limit)
+
+    (1..limit).map { |num| output_for num }
+  end
+
   private
 
   def check?(divisor, number)
@@ -19,6 +25,6 @@ class FizzBuzzGenerator
   end
 
   def valid?(number)
-    number.is_a? Integer
+    number.is_a?(Integer) && number.positive?
   end
 end

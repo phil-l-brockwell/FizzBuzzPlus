@@ -3,6 +3,29 @@
 require './lib/fizz_buzz_generator'
 
 describe FizzBuzzGenerator do
+  context '#upto' do
+    context 'success' do
+      it 'returns the outputs for all the numbers upto the input' do
+        expect(subject.upto(10))
+          .to eq([1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz'])
+      end
+    end
+
+    context 'error' do
+      context 'with a negative number' do
+        it 'returns an ArgumentError' do
+          expect { subject.upto(-10) }.to raise_error(ArgumentError)
+        end
+      end
+    end
+
+    context 'with a string' do
+      it 'returns a string' do
+        expect { subject.upto('ten') }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
   context '#output_for' do
     context 'success' do
       context 'a number not divisible by 3 or 5' do
